@@ -1,0 +1,43 @@
+{
+  "name": "xp",
+  "version": "1.0.1",
+  "private": true,
+  "description": "The ERC20 token for Arcane Foundation's XP.",
+  "homepage": "https://github.com/arcane-foundation/xp-token",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arcane-foundation/xp-token"
+  },
+  "license": "MIT",
+  "author": "Arcane Foundation",
+  "scripts": {
+    "build": "forge build --via-ir",
+    "build:optimized": "FOUNDRY_PROFILE=optimized forge build",
+    "coverage": "forge coverage --match-contract Unit",
+    "postinstall": "forge install",
+    "lint:check": "yarn lint:sol-tests && yarn lint:sol-logic && forge fmt check",
+    "lint:fix": "sort-package-json && forge fmt && yarn lint:sol-tests --fix && yarn lint:sol-logic --fix",
+    "lint:sol-logic": "solhint 'solidity/contracts/**/*.sol' 'solidity/interfaces/**/*.sol'",
+    "lint:sol-tests": "solhint -c .solhint.tests.json 'solidity/test/**/*.sol'",
+    "prepare": "husky install",
+    "test": "forge test -vvv --via-ir",
+    "test:e2e": "forge test --match-contract E2E -vvv --via-ir",
+    "test:unit": "forge test --match-contract Unit -vvv --via-ir",
+    "test:unit:deep": "FOUNDRY_FUZZ_RUNS=5000 yarn test:unit --via-ir"
+  },
+  "lint-staged": {
+    "*.{js,css,md,ts,sol}": "forge fmt",
+    "*.sol": "solhint --fix 'solidity/**/*.sol'",
+    "package.json": "sort-package-json"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "17.0.3",
+    "@commitlint/config-conventional": "17.0.3",
+    "cross-env": "7.0.3",
+    "husky": ">=8",
+    "lint-staged": "13.2.2",
+    "solhint": "3.5.1",
+    "solhint-plugin-defi-wonderland": "1.1.0",
+    "sort-package-json": "1.53.1"
+  }
+}
